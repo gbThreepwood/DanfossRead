@@ -10,3 +10,10 @@ In order for the controller to support Modbus, the EKA178A extention module must
 The board connects to a 8-pin socket in the controller.
 
 There are no labels on the screw terminals for the RS485 bus, the correct connection has been determined by inspecting the circuit board.
+
+
+![alt tag](https://raw.githubusercontent.com/gbThreepwood/DanfossRead/master/eka178a.jpg)
+
+![alt tag](https://raw.githubusercontent.com/gbThreepwood/DanfossRead/master/ekc202_front.jpg)
+
+![alt tag](https://raw.githubusercontent.com/gbThreepwood/DanfossRead/master/ekc202_top.jpg)
