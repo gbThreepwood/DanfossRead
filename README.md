@@ -3,7 +3,7 @@ Software for communication with the Modbus interface of the Danfoss EKC202 refri
 
 The interface is intended to be used in cojunction with the properietary ADAP-KOOL® system from Danfoss. No documentation regarding the communication protocol is provided, and thus the protocol must be reverse enigneered.
 
-A menu entry on the controller allows for setting the bus address.
+A menu entry on the controller allows for setting the bus address. Menu entry o03 network address, allowed range is between 0 and 240.
 
 ## Interface board
 In order for the controller to support Modbus, the EKA178A extention module must be connected. The module consists of a Atmel Atmega32 microcontroller, a 6LB184 differential transciever, and a CM0403CG common mode choke connected between the transciever and the RS485 terminals.
