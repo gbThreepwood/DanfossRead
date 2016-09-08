@@ -58,6 +58,9 @@ Response: [02][81][01][71][90]
 By performing a casual attempt at reading an input register the response is modbus exception 02 ILLEGAL DATA ADDRESS.
 [02][84][02][32][C1]
 
+
+#### Input registers (command 0x04)
+
 After iterating through some more registers the following data has been obtained.
 
 
@@ -75,3 +78,20 @@ After iterating through some more registers the following data has been obtained
 | 125 | 01:04:02:00:00:b9:30           |
 | 149 | 01:04:02:00:00:b9:30           |
 | 150 | 01:04:02:00:00:b9:30           |
+
+#### Holding registers (command 0x03)
+
+| Register no. | Response              |
+|--------------|-----------------------|
+| 99  |                  |
+| 100 | 38:43                          |
+| 101 |            |
+| 102 |            |
+| 103 |            |
+| 104 |            |
+| 112 |            |
+| 116 |            |
+| 124 |            |
+| 125 |            |
+| 149 |            |
+| 150 |            |
