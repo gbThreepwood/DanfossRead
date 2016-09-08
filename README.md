@@ -22,13 +22,29 @@ The microcontroller is located on the small circuit board in front, behind the s
 
 ![alt tag](https://raw.githubusercontent.com/gbThreepwood/DanfossRead/master/images/ekc202_top.jpg)
 
+
+
+
+
+
+## UART settings
+The serial port UART parameters are not specified, however the following parameters generated a response from the server.
+
+- Baud rate: 9600
+- Data bits: 8
+- Parity type: even
+- Stop bits: 1
+- Bit order: lsb first
+
+
 ## Modbus test software
 As the registry map is undocumented, all possible registry addresses should be polled, until something interesting appears. This is achieved using Python with the Pymodbus extention module.
 
+### Inital testing
 
 By sending a read coil status, or read input status command, the response is a modbus exception code 01 ILLEGAL FUNCTION. This indicates that these functions are unsupported. Please see the modbus spesification for more details.
 
-### Examples
+#### Examples
 Read coil status for controller address 02
 Command: [02][01][00][02][00][64][9c][12]
 Response: [02][81][01][71][90]
@@ -38,6 +54,6 @@ Similarily for a read input status request
 Command: [02][02][00][02][00][64][d8][12]
 Response: [02][81][01][71][90]
 
-### Register examples
+#### Register examples
 By attemting to read a input register the response is modbus exception 02 ILLEGAL DATA ADDRESS.
 [02][84][02][32][C1]
