@@ -38,7 +38,7 @@ The serial port UART parameters are not specified, however the following paramet
 
 
 ## Modbus test software
-As the registry map is undocumented, all possible registry addresses should be polled, until something interesting appears. This is achieved using Python with the Pymodbus extention module.
+As the registry map is undocumented, all possible registry addresses should be polled, until something interesting appears. This is achieved using Python with the pyserial module.
 
 ### Inital testing
 
@@ -55,5 +55,17 @@ Command: [02][02][00][02][00][64][d8][12]
 Response: [02][81][01][71][90]
 
 #### Register examples
-By attemting to read a input register the response is modbus exception 02 ILLEGAL DATA ADDRESS.
+By performing a casual attempt at reading an input register the response is modbus exception 02 ILLEGAL DATA ADDRESS.
 [02][84][02][32][C1]
+
+After iterating through some more registers the following data has been obtained.
+
+
+| Register no. | Resonse               |
+|--------------|-----------------------|
+| 99  | 01:04:04:00:0a                 |
+| 100 | 00:14                          |
+| 101 | 01:04:04:01:f4:fe:0c:fb:ef     |
+| 102 | 01:04:04:fe:0c:00:00:0a        |
+| 103 | 6f:01:04:04:00:00:00:00:fb:84  |
+| 124 | 01:04:04:00:00:00:00:fb:84     |
