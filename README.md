@@ -44,7 +44,7 @@ The serial port UART parameters are not specified, however the following paramet
 ## Modbus test software
 As the registry map is undocumented, all possible registry addresses should be polled, until something interesting appears. This is achieved using Python with the pyserial module.
 
-### Inital testing
+### Initial testing
 
 By sending a read coil status, or read input status command, the response is a modbus exception code 01 ILLEGAL FUNCTION. This indicates that these functions are unsupported. Please see the modbus spesification for more details.
 
@@ -65,7 +65,7 @@ By performing a casual attempt at reading an input register the response is modb
 
 #### Input registers (command 0x04)
 
-After iterating through some more registers the following data has been obtained.
+After iterating through some more registers the following data was obtained.
 
 
 | Register no. | Response              |
@@ -83,19 +83,4 @@ After iterating through some more registers the following data has been obtained
 | 149 | 01:04:02:00:00:b9:30           |
 | 150 | 01:04:02:00:00:b9:30           |
 
-#### Holding registers (command 0x03)
-
-| Register no. | Response              |
-|--------------|-----------------------|
-| 99  |                  |
-| 100 | 38:43                          |
-| 101 |            |
-| 102 |            |
-| 103 |            |
-| 104 |            |
-| 112 |            |
-| 116 |            |
-| 124 |            |
-| 125 |            |
-| 149 |            |
-| 150 |            |
+A program was written to iterate through all 9999 registers. The resulting data is included in the file [input_register_dump.txt!](input_register_dump.txt). By analyzing this data and comparing it to data from a controller with a different temperature reading, it was determined that register 2575 and 2588 most likely contains the temperature information.
