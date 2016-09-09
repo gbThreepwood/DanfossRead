@@ -21,8 +21,8 @@ ser.stopbits = serial.STOPBITS_ONE #number of stop bits
 ser.xonxoff = False    #disable software flow control
 ser.rtscts = False    #disable hardware (RTS/CTS) flow control
 ser.dsrdtr = False       #disable hardware (DSR/DTR) flow control
-ser.writeTimeout = 1 #timeout for write
-
+ser.writeTimeout = 0.1 #timeout for write
+ser.readTimeout = 0.1
 
 print ser
 
@@ -44,10 +44,11 @@ print ser
 
 
 def read_input_register(dev, reg):
-    command = chr(dev) + '\x04\x00' + chr(reg) + '\x00\x01'
+    command = chr(dev) + '\x04' + struct.pack('>H',reg) + '\x00\x01'
     crc =  crc16.calcString(command, 0xFFFF)
     command = command + struct.pack('<H',crc) 
 
+    print 'Register: ' +  str(reg)
     print ":".join("{:02x}".format(ord(c)) for c in command)
     
     ser.rts = True
@@ -55,16 +56,43 @@ def read_input_register(dev, reg):
     time.sleep(0.008)
     ser.rts = False
 
+    time.sleep(1)        
+    
     return ser.readline()
   
 def main():
-    for reg in range(0,99):
-        print 'Polling register: ' +  str(reg)
+#    for reg in range(0,9999):
+#        #print 'Polling register: ' +  str(reg)
+#
+#        response = read_input_register(1, reg)
+#
+#        if response[1:2] == '\x83':
+#            a = 1
+#            #print '.',
+#        else:
+#            print 'Register: ' +  str(reg)
+#            print ":".join("{:02x}".format(ord(c)) for c in response)
+#
+    #reg = [2010, 2002, 1999, 1504, 1020, 1010, 1006, 1000, 101, 100, 99]
 
-        response = read_input_register(3, reg)
-        
-        print ":".join("{:02x}".format(ord(c)) for c in response)
+    reg = [2588, 2575, 2103, 2102, 2002, 1010, 102, 101, 100, 99]
+    dev = [1, 2]
 
+    for j in range(len(dev)):
+        print '==========================='
+        print 'Using device: ' + str(dev[j]) 
+        for i in range(len(reg)):
+            #print 'Polling register: ' +  str(reg)
+
+            response = read_input_register(dev[j], reg[i])
+
+            if response[1:2] == '\x83':
+                a = 1
+                #print '.',
+            else:
+                #print 'Register: ' +  str(reg[i])
+                print ":".join("{:02x}".format(ord(c)) for c in response)
+                print '-'
 
 
 if __name__ == '__main__':
