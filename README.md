@@ -5,6 +5,10 @@ The interface is intended to be used in cojunction with the properietary ADAP-KO
 
 A menu entry on the controller allows for setting the bus address. Menu entry o03 network address, allowed range is between 0 and 240.
 
+
+For the impatient that does not want to read the entire README, it appears that modbus input register **2575** contains the reading from the thermistor. That is the relative address, you may add 30000 to obtain the true address. The transmitted modbus request contains the relative address however.
+
+
 ## Interface board
 In order for the controller to support Modbus, the EKA178A extention module must be connected. The module consists of a Atmel Atmega32 microcontroller, a 6LB184 differential transciever, and a CM0403CG common mode choke connected between the transciever and the RS485 terminals.
 
