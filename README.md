@@ -1,7 +1,7 @@
 # DanfossRead
 Software for communication with the Modbus interface of the Danfoss EKC202 refrigerator controllers.
 
-The interface is intended to be used in cojunction with the properietary ADAP-KOOL® system from Danfoss. No documentation regarding the communication protocol is provided, and thus the protocol must be reverse enigneered.
+The interface is intended to be used in cojunction with the properietary ADAP-KOOL® system from Danfoss. No documentation regarding the purpose of the various modbus registers is provided, and thus the controller must be reverse enigneered.
 
 A menu entry on the controller allows for setting the bus address. Menu entry o03 network address, allowed range is between 0 and 240.
 
@@ -83,4 +83,4 @@ After iterating through some more registers the following data was obtained.
 | 149 | 01:04:02:00:00:b9:30           |
 | 150 | 01:04:02:00:00:b9:30           |
 
-A program was written to iterate through all 9999 registers. The resulting data is included in the file [input_register_dump.txt!](input_register_dump.txt). By analyzing this data and comparing it to data from a controller with a different temperature reading, it was determined that register 2575 and 2588 most likely contains the temperature information.
+A program was written to iterate through all 9999 registers. The resulting data is included in the file [input_register_dump.txt](input_register_dump.txt). By analyzing this data and comparing it to data from a controller with a different temperature reading, it was determined that register 2575 and 2588 most likely contains the temperature information.
