@@ -7,19 +7,11 @@ import serial
 import time
 
 import crc16
-
 import struct
-
 import paho.mqtt.client as mqtt
-
-#def compute_crc(data):
-#    crc = '10'
-#    return crc
-#
 
 
 ser = serial.Serial('/dev/danfoss', 9600, timeout=1, rtscts=False)
-
 
 ser.bytesize = serial.EIGHTBITS #number of bits per bytes
 ser.parity = serial.PARITY_EVEN #set parity check: no parity
@@ -30,7 +22,7 @@ ser.dsrdtr = False       #disable hardware (DSR/DTR) flow control
 ser.writeTimeout = 0.1 #timeout for write
 ser.readTimeout = 0.1
 
-print ser
+#print ser
 
 #address = '\x09'
 #command = '\x11'
@@ -80,25 +72,29 @@ def main():
     mqttc.connect("localhost")
     mqttc.loop_start()
 
-    while True:
+ #   while True:
 
-        response = read_input_register(1, 2575)
-    
+    response = read_input_register(1, 2575)
+
+    if response:    
         print ":".join("{:02x}".format(ord(c)) for c in response)
     
         temperature = ord(response[4:5])/10.0
         print 'Temperature: ' + str(temperature)
         mqttc.publish("ekc2021/temperature", temperature) 
-        response = read_input_register(2, 2575)
-   
-
-        response = read_input_register(2, 2575)
+    else:
+        print "No data for EKC module at address 1"
  
+    response = read_input_register(2, 2575)
+    
+    if response: 
         temperature = ord(response[4:5])/10.0
         print 'Temperature: ' + str(temperature)
-        mqttc.publish("ekc2022/temperature", temperature) 
+        mqttc.publish("ekc2022/temperature", temperature)
+    else:
+        print "No data for EKC module at address 2"
  
-        time.sleep(2)
+#        time.sleep(2)
 
 if __name__ == '__main__':
     main()
